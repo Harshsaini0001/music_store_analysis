@@ -1,17 +1,13 @@
 -- 	Question Set 1
 -- -----1. Who is the senior most employee based on job title?
 
-
-
-
 select * from employee
 order by levels desc 
 limit 1;
 
 
+
 -- -----2. Which countries have the most Invoices?
-
-
 
 select billing_country as counties, 
 count(billing_country) as no_of_invoices 
@@ -20,19 +16,19 @@ group by billing_country
 order by no_of_invoices desc;
 
 
--- -----3. What are top 3 values of total invoice?
 
+-- -----3. What are top 3 values of total invoice?
 
 select total from invoice
 order by total desc
 limit 3;
 
+
+
 -- -----4. Which city has the best customers? We would like to throw a promotional Music 
 -- Festival in the city we made the most money. Write a query that returns one city that 
 -- has the highest sum of invoice totals. Return both the city name & sum of all invoice 
 -- totals 
-
-
 
 select billing_city as city,round(sum(total)::numeric,2) as invoice_total
 from invoice
@@ -41,12 +37,10 @@ order by invoice_total desc
 limit 1;
 
 
+
 -- -----5. Who is the best customer? The customer who has spent the most money will be 
 --declared the best customer. Write a query that returns the person who has spent the 
 --most money
-
-
-
 
 select customer.customer_id, customer.first_name, customer.last_name, round(sum(invoice.total)::numeric,2) as invoice_total from customer
 join invoice on	
@@ -57,13 +51,11 @@ limit 1;
 
 
 
+
+
 -- Question Set 2 – Moderate
 -- -----1. Write query to return the email, first name, last name, & Genre of all Rock Music 
 --listeners. Return your list ordered alphabetically by email starting with A
-
-
-
-
 
 select customer.email, customer.first_name, customer.last_name 
 from customer
@@ -102,14 +94,9 @@ limit 10;
 
 
 
-
 -- -----3. Return all the track names that have a song length longer than the average song length. 
 --Return the Name and Milliseconds for each track. Order by the song length with the 
 --longest songs listed first
-
-
-
-
 
 select name, milliseconds as length_of_track 
 from track
@@ -120,12 +107,11 @@ order by milliseconds desc;
 
 
 
+
+
 -- Question Set 3 – Advance
 -- -----1. Find how much amount spent by each customer on artists? Write a query to return
 --customer name, artist name and total spent
-
-
-
 
 select customer.first_name||customer.last_name as cust_name,artist.name as artist_name,round(sum(invoice.total)::numeric, 2) as total_spent  
 from customer
@@ -163,7 +149,6 @@ group by 2,3,4
 order by 2 asc, 1 desc
 )
 select * from popular_genre where Row_no <= 1;
-
 
 
 
